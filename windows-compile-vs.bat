@@ -236,7 +236,7 @@ call :get-extension-zip-from-github "libdeflate"            "%PHP_LIBDEFLATE_VER
 call :get-extension-zip-from-github "xxhash"                "%PHP_XXHASH_VER%"                "pmmp"     "ext-xxhash"              || exit 1
 call :get-extension-zip-from-github "xdebug"                "%PHP_XDEBUG_VER%"                "xdebug"   "xdebug"                  || exit 1
 call :get-extension-zip-from-github "arraydebug"            "%PHP_ARRAYDEBUG_VER%"            "pmmp"     "ext-arraydebug"          || exit 1
-call :get-symphony || exit 1
+call :get-symfony || exit 1
 
 call :pm-echo " - crypto: downloading %PHP_CRYPTO_VER%..."
 git clone https://github.com/bukka/php-crypto.git crypto >>"%log_file%" 2>&1 || exit 1
@@ -261,6 +261,7 @@ call configure^
  --%PHP_HAVE_DEBUG%^
  --disable-all^
  --disable-cgi^
+ --enable-symfony^
  --enable-cli^
  --enable-zts^
  --enable-pdo^
@@ -351,6 +352,7 @@ if "%PM_VERSION_MAJOR%" geq "5" (
 (echo extension=php_openssl.dll)>>"%php_ini%"
 (echo extension=php_chunkutils2.dll)>>"%php_ini%"
 (echo extension=php_igbinary.dll)>>"%php_ini%"
+(echo extension=php_symfony.dll)>>"%php_ini%"
 (echo extension=php_leveldb.dll)>>"%php_ini%"
 (echo extension=php_crypto.dll)>>"%php_ini%"
 (echo extension=php_libdeflate.dll)>>"%php_ini%
@@ -439,8 +441,8 @@ call :get-zip https://github.com/%~3/%~4/archive/%~2.zip || exit /B 1
 move %~4-%~2 %~1 >>"%log_file%" 2>&1 || exit /B 1
 exit /B 0
 
-:get-symphony
-call :pm-echo "Downloading Symfony latest..."
+:get-symfony
+call :pm-echo " - Downloading Symfony latest..."
 call :get-zip https://github.com/symfony/symfony/archive/refs/tags/v6.3.3.zip || exit /B 1
 move symfony-6.3.3 symfony || exit /B 1
 exit /B 0
