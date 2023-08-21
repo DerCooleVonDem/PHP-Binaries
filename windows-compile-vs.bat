@@ -439,10 +439,10 @@ call :get-zip https://github.com/%~3/%~4/archive/%~2.zip || exit /B 1
 move %~4-%~2 %~1 >>"%log_file%" 2>&1 || exit /B 1
 exit /B 0
 
-:get-symphony:
-call :pm-echo "Downloading symfony latest..."
+:get-symphony
+call :pm-echo "Downloading Symfony latest..."
 call :get-zip https://github.com/symfony/symfony/archive/refs/tags/v6.3.3.zip || exit /B 1
-move symphony-6.3.3 symphony ||  || exit /B 1
+move symfony-6.3.3 symfony || exit /B 1
 exit /B 0
 
 :get-zip
